@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:caelum="http://java.sun.com/jsf/composite/caelum">
+<h:head>
+	<title>Sistema de Notas Fiscais - Uberdist: <ui:insert
+			name="subtitulo"></ui:insert></title>
+	<h:outputStylesheet name="style.css" library="css" />
+</h:head>
+
+<h:body>
+	<div id="cabecalho">
+		<h:graphicImage library="imagens" name="logo-uber.png"
+			id="logoCompany" />
+	</div>
+
+	<div id="usuarioLogado">
+		<h:outputText rendered="#{not empty loginBean.usuario.senha}"
+			value="Usuário(a): #{loginBean.usuario.login}"></h:outputText>
+	</div>
+
+	<div id="menu" class="menuPersonalizado">
+		<h:form rendered="#{not empty loginBean.usuario.senha}">
+			<div class="itemMenuPersonalizado">
+				<h:commandButton value="Produto" action="produto">
+				</h:commandButton>
+			</div>
+
+			<div class="itemMenuPersonalizado">
+				<h:commandButton value="Usuário" action="usuario">
+				</h:commandButton>
+			</div>
+
+			<div class="itemMenuPersonalizado">
+				<h:commandButton value="Nota fiscal" action="notaFiscal">
+				</h:commandButton>
+			</div>
+
+			<div class="itemMenuPersonalizado">
+				<h:commandButton value="Sair" action="#{loginBean.efetuaLogoff}">
+				</h:commandButton>
+			</div>
+		</h:form>
+	</div>
+
+	<ui:insert name="corpo">
+		Corpo
+	</ui:insert>
+
+	<div id="rodape">Copyright 2013. Todos os direitos reservados a
+		André Formento</div>
+</h:body>
+</html>

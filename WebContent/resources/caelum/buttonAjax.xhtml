@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:cc="http://java.sun.com/jsf/composite">
+
+<cc:interface>
+	<!-- pode ser na assinatura do método java.lang.String -->
+	<cc:attribute name="action" method-signature="void action()" />
+	<cc:attribute name="value" />	
+	
+	<cc:attribute name="execute" default="@form" />
+	<cc:attribute name="render" default="@form" />
+</cc:interface>
+
+<cc:implementation>
+	<h:commandButton action="#{cc.attrs.action}" value="#{cc.attrs.value}">
+		<f:ajax execute="#{cc.attrs.execute}" render="#{cc.attrs.render}" />
+	</h:commandButton>
+</cc:implementation>
+
+</html>

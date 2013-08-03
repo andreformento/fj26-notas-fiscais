@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="subtitulo">Login</ui:define>
+
+	<ui:define name="corpo">
+		<div id="conteudo">
+
+			<h:form id="formlogin">
+				<h:panelGrid columns="2" styleClass="campos">
+					<h:outputLabel value="Login:" />
+					<h:outputText value="#{loginBean.usuario.login}"
+						rendered="#{not empty loginBean.usuario.senha}" />
+					<h:inputText value="#{loginBean.usuario.login}"
+						rendered="#{empty loginBean.usuario.senha}" />
+
+					<h:outputLabel value="Senha:"
+						rendered="#{empty loginBean.usuario.senha}" />
+					<h:inputSecret value="#{loginBean.usuario.senha}"
+						rendered="#{empty loginBean.usuario.senha}" />
+
+					<h:commandButton value="Efetuar login"
+						action="#{loginBean.efetuaLogin}"
+						rendered="#{empty loginBean.usuario.senha}">
+					</h:commandButton>
+				</h:panelGrid>
+			</h:form>
+		</div>
+
+	</ui:define>
+
+
+</ui:composition>
+
+</html>

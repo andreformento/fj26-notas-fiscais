@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:caelum="http://java.sun.com/jsf/composite/caelum">
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="subtitulo">Produto</ui:define>
+
+	<ui:define name="corpo">
+		<div id="conteudo">
+
+			<h:form id="form_cadastro">
+				<fieldset>
+					<legend>Dados do produto</legend>
+
+					<caelum:labelText id="nome" label="Nome" value="#{produtoBean.produto.nome}" />
+
+					<h:outputLabel value="Descrição" for="desc" />
+					<h:inputTextarea id="desc" value="#{produtoBean.produto.descricao}" />
+
+					<caelum:labelText id="preco" label="Preço" value="#{produtoBean.produto.preco}" />
+
+					<caelum:buttonAjax action="#{produtoBean.grava}" 
+							value="Cadastrar"
+							render="@form :form_lista" />
+					
+					<h:commandButton value="Atualizar" action="#{produtoBean.atualiza}"
+						rendered="#{not empty produtoBean.produto.id}">
+
+						<f:ajax execute="@form" render="@form :form_lista" />
+
+						<!-- execute -> envia os dados para o servidor -->
+
+						<!-- para executar mais de uma coisa: -->
+						<!-- "@form :idDeOutroForm :idDeOutroForm:componenteDoOutroForm" -->
+
+						<!-- render -> recebe os dados para o servidor -->
+
+						<!-- fazer exercicio 4.6 -->
+					</h:commandButton>
+					<h:commandLink value="Cancelar"
+						rendered="#{not empty produtoBean.produto.id}">
+						<f:setPropertyActionListener target="#{produtoBean.produto}"
+							value="#{produtoBean.novoProduto}" />
+						<f:ajax render="@form" />
+					</h:commandLink>
+				</fieldset>
+			</h:form>
+
+
+			<h:form id="form_lista">
+				<h2>Listagem de produtos</h2>
+
+
+				<h:dataTable value="#{produtoBean.produtos}" var="produto"
+					styleClass="dados" rowClasses="impar,par">
+					<h:column>
+						<f:facet name="header">Ações</f:facet>
+						<h:commandLink value="Alterar">
+							<f:setPropertyActionListener target="#{produtoBean.produto}"
+								value="#{produto}">
+								<f:ajax render="@form" />
+							</f:setPropertyActionListener>
+
+						</h:commandLink>
+						<h:commandButton value="Remover">
+							<f:ajax render="@form" listener="#{produtoBean.remove(produto)}" />
+						</h:commandButton>
+
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Nome</f:facet>
+					#{produto.nome}
+				</h:column>
+
+					<h:column>
+						<f:facet name="header">Descrição</f:facet>
+					#{produto.descricao}
+				</h:column>
+
+					<h:column>
+						<f:facet name="header">Preço</f:facet>
+					
+					R$ #{produto.preco}
+					
+					<f:facet name="footer">
+						Total: R$ #{produtoBean.precoTotal}
+				    </f:facet>
+					</h:column>
+				</h:dataTable>
+
+			</h:form>
+		</div>
+
+	</ui:define>
+
+
+</ui:composition>
+
+</html>
