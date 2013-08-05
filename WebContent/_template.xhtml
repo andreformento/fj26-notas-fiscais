@@ -25,22 +25,22 @@
 	<div id="menu" class="menuPersonalizado">
 		<h:form rendered="#{not empty loginBean.usuario.senha}">
 			<div class="itemMenuPersonalizado">
-				<h:commandButton value="Produto" action="produto">
+				<h:commandButton value="Produto" action="produto" immediate="true" >
 				</h:commandButton>
 			</div>
 
 			<div class="itemMenuPersonalizado">
-				<h:commandButton value="Usuário" action="usuario">
+				<h:commandButton value="Usuário" action="usuario" immediate="true" >
 				</h:commandButton>
 			</div>
 
 			<div class="itemMenuPersonalizado">
-				<h:commandButton value="Nota fiscal" action="notaFiscal">
+				<h:commandButton value="Nota fiscal" action="notaFiscal" immediate="true" >
 				</h:commandButton>
 			</div>
 
 			<div class="itemMenuPersonalizado">
-				<h:commandButton value="Sair" action="#{loginBean.efetuaLogoff}">
+				<h:commandButton value="Sair" action="#{loginBean.efetuaLogoff}" immediate="true" >
 				</h:commandButton>
 			</div>
 		</h:form>
