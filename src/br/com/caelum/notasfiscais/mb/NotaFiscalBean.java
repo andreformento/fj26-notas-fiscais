@@ -1,5 +1,7 @@
 package br.com.caelum.notasfiscais.mb;
 
+import java.io.Serializable;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -10,7 +12,12 @@ import br.com.caelum.notasfiscais.modelo.Produto;
 
 @ManagedBean
 @ViewScoped
-public class NotaFiscalBean {
+public class NotaFiscalBean implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3971991951071860494L;
+
 	private Item item = new Item();
 	private NotaFiscal notaFiscal = new NotaFiscal();
 	private Long idProduto;
@@ -51,7 +58,7 @@ public class NotaFiscalBean {
 
 		item = new Item();
 	}
-	
+
 	public void gravar() {
 		DAO<NotaFiscal> dao = new DAO<>(NotaFiscal.class);
 		dao.adiciona(notaFiscal);
@@ -62,7 +69,7 @@ public class NotaFiscalBean {
 	public void tiraItem(Item i) {
 		notaFiscal.removerItem(item);
 	}
-	
+
 	public Double getValorTotalNotaFiscal() {
 		return notaFiscal.getValorTotalNotaFiscal();
 	}
