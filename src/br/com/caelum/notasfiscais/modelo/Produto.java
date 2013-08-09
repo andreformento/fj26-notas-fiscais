@@ -17,6 +17,7 @@ public class Produto implements Serializable {
 	@GeneratedValue
 	private Long id;
 
+	// @Pattern(message = "Produto deve ter um nome válido")
 	private String nome;
 
 	private String descricao;

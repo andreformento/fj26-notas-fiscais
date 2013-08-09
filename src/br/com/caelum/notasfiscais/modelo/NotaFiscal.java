@@ -1,5 +1,6 @@
 package br.com.caelum.notasfiscais.modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -13,12 +14,19 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class NotaFiscal {
+public class NotaFiscal implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5872970803094653082L;
 
 	@Id
 	@GeneratedValue
 	private Long id;
 
+	// @Pattern(regexp = "\\d{2}\\.\\d{3}\\.\\d{3}/\\d{4}-\\d{2}", message =
+	// "CNPJ inválido")
 	private String cnpj;
 
 	@Temporal(TemporalType.DATE)
@@ -76,6 +84,12 @@ public class NotaFiscal {
 				resultado += item.getTotal();
 
 		return resultado;
+	}
+
+	@Override
+	public String toString() {
+		return "NotaFiscal [id=" + id + ", cnpj=" + cnpj + ", data=" + data
+				+ ", itens=" + itens + "]";
 	}
 
 }

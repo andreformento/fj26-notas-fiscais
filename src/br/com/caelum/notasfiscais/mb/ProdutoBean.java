@@ -25,10 +25,6 @@ public class ProdutoBean implements Serializable {
 	private DAO<Produto> getDAO() {
 		return new DAO<>(Produto.class);
 	}
-	
-	public Produto getNovoProduto() {
-		return new Produto();
-	}
 
 	public Produto getProduto() {
 		return produto;

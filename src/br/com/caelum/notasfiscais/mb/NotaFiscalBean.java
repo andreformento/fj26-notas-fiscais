@@ -47,6 +47,7 @@ public class NotaFiscalBean implements Serializable {
 	}
 
 	public void guardaItem() {
+
 		DAO<Produto> dao = new DAO<Produto>(Produto.class);
 
 		Produto produto = dao.buscaPorId(idProduto);
@@ -60,6 +61,7 @@ public class NotaFiscalBean implements Serializable {
 	}
 
 	public void gravar() {
+
 		DAO<NotaFiscal> dao = new DAO<>(NotaFiscal.class);
 		dao.adiciona(notaFiscal);
 		this.notaFiscal = new NotaFiscal();
@@ -67,11 +69,16 @@ public class NotaFiscalBean implements Serializable {
 	}
 
 	public void tiraItem(Item i) {
+
 		notaFiscal.removerItem(item);
 	}
 
 	public Double getValorTotalNotaFiscal() {
 		return notaFiscal.getValorTotalNotaFiscal();
+	}
+
+	public void cancelar() {
+		item = new Item();
 	}
 
 }

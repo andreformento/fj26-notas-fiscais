@@ -4,8 +4,9 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:caelum="http://java.sun.com/jsf/composite/caelum">
- 
+	xmlns:caelum="http://java.sun.com/jsf/composite/caelum"
+	xmlns:p="http://primefaces.org/ui">
+
 <ui:composition template="_template.xhtml">
 	<ui:define name="subtitulo">Produto</ui:define>
 
@@ -13,20 +14,31 @@
 		<div id="conteudo">
 
 			<h:form id="form_cadastro">
+				<h:messages styleClass="erros" />
+
 				<fieldset>
 					<legend>Dados do produto</legend>
 
-					<caelum:labelText id="nome" label="Nome" value="#{produtoBean.produto.nome}" />
+					<h:outputLabel value="Nome" for="nome" />
+					<h:inputText id="nome" value="#{produtoBean.produto.nome}">
+						<f:validator validatorId="ComecaComMaiuscula"/>
+					</h:inputText>
 
 					<h:outputLabel value="Descrição" for="desc" />
 					<h:inputTextarea id="desc" value="#{produtoBean.produto.descricao}" />
 
-					<caelum:labelText id="preco" label="Preço" value="#{produtoBean.produto.preco}" />
+					<!--caelum:labelText id="preco" label="Preço"
+						value="#{produtoBean.produto.preco}" /-->
+					<h:outputLabel value="Preço" for="preco" />
+					<h:inputText id="preco" value="#{produtoBean.produto.preco}"
+							required="true" requiredMessage="Preço obrigatório"
+							validatorMessage="O valor mínimo é R$ 0,50">
+						<f:validateDoubleRange minimum="0.5" />
+					</h:inputText>
 
-					<caelum:buttonAjax action="#{produtoBean.grava}" 
-							value="Cadastrar"
-							render="@form :form_lista" />
-					
+					<caelum:buttonAjax action="#{produtoBean.grava}" value="Cadastrar"
+						render="@form :form_lista" />
+
 					<h:commandButton value="Atualizar" action="#{produtoBean.atualiza}"
 						rendered="#{not empty produtoBean.produto.id}">
 
@@ -41,12 +53,12 @@
 
 						<!-- fazer exercicio 4.6 -->
 					</h:commandButton>
-					<h:commandLink value="Cancelar"
-						rendered="#{not empty produtoBean.produto.id}">
-						<f:setPropertyActionListener target="#{produtoBean.produto}"
-							value="#{produtoBean.novoProduto}" />
-						<f:ajax render="@form" />
-					</h:commandLink>
+					
+					<p:commandButton action="produto"
+							update="@form"
+							value="Cancelar"
+							rendered="#{not empty produtoBean.produto.id}"
+							immediate="true" />
 				</fieldset>
 			</h:form>
 

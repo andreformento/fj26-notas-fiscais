@@ -4,35 +4,31 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:caelum="http://java.sun.com/jsf/composite/caelum">
+	xmlns:caelum="http://java.sun.com/jsf/composite/caelum"
+	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="_template.xhtml">
 	<ui:define name="subtitulo">Produto</ui:define>
 
 	<ui:define name="corpo">
 		<div id="conteudo">
-
 			<h:form id="form_nota">
+				<h:messages styleClass="erros" />
+
 				<fieldset>
 					<legend>Dados da nota</legend>
 
-					<caelum:labelText id="cnpj" label="CNPJ do cliente"
-						value="#{notaFiscalBean.notaFiscal.cnpj}" />
-
-					<!--<caelum:labelText id="data" label="Data" value="#{notaFiscalBean.notaFiscal.data.time}">
-						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" />
-					</caelum:labelText>-->
+					<h:outputLabel for="notaFiscal" value="CNPJ" />
+					<p:inputMask id="notaFiscal" mask="99.999.999/9999-99"
+						value="#{notaFiscalBean.notaFiscal.cnpj}" converter="cnpj"
+						converterMessage="CNPJ inválido" />
 
 					<h:outputLabel value="Data" />
-					<h:inputText value="#{notaFiscalBean.notaFiscal.data.time}">
-						<f:convertDateTime pattern="dd/MM/yyyy"
-							timeZone="America/Sao_Paulo" />
-					</h:inputText>
+					<p:calendar pattern="dd/MM/yyyy"
+						value="#{notaFiscalBean.notaFiscal.data.time}" />
 
 				</fieldset>
-			</h:form>
 
-			<h:form id="form_item">
 				<fieldset>
 					<legend>Dados do item</legend>
 
@@ -44,11 +40,17 @@
 						<!-- <f:selectItem value="0" itemLabel="Selecionar" /> -->
 					</h:selectOneMenu>
 
-					<caelum:labelText id="quantidade" label="Quantidade"
+					<h:outputLabel value="Quantidade" for="quantidade" />
+					<h:inputText id="quantidade"
 						value="#{notaFiscalBean.item.quantidade}" />
 
-					<caelum:buttonAjax action="#{notaFiscalBean.guardaItem}"
-						value="Guardar item" render="@form :form_lista" />
+					<p:commandButton action="#{notaFiscalBean.cancelar}" update="@form"
+						value="Cancelar" rendered="#{not empty notaFiscalBean.item.id}" />
+
+					<h:commandButton action="#{notaFiscalBean.guardaItem}"
+						value="Guardar item">
+						<f:ajax render="@form :form_lista" execute="@form" />
+					</h:commandButton>
 
 				</fieldset>
 			</h:form>
@@ -62,17 +64,17 @@
 					<h:column>
 						<f:facet name="header">Ações</f:facet>
 
-						<h:commandLink value="Alterar">
+						<h:commandButton value="Alterar">
 							<f:setPropertyActionListener target="#{notaFiscalBean.item}"
 								value="#{item}">
-								<f:ajax render="@form" />
 							</f:setPropertyActionListener>
-						</h:commandLink>
+							<f:ajax render=":form_nota" execute=":form_nota" />
+						</h:commandButton>
 
-						<caelum:buttonAjax value="Remover"
+						<h:commandButton value="Remover"
 							action="#{notaFiscalBean.tiraItem(item)}">
-						</caelum:buttonAjax>
-
+							<f:ajax render="@form" execute="@form" />
+						</h:commandButton>
 					</h:column>
 
 					<h:column>
@@ -104,9 +106,11 @@
 						</f:facet>
 					</h:column>
 				</h:dataTable>
-				
-				<caelum:buttonAjax action="#{notaFiscalBean.gravar}"
-						value="Gravar nota fiscal" render="@form :form_item :form_nota" />
+
+				<h:commandButton action="#{notaFiscalBean.gravar}"
+					value="Gravar nota fiscal">
+					<f:ajax render=":form_nota" execute=":form_nota" />
+				</h:commandButton>
 			</h:form>
 		</div>
 
