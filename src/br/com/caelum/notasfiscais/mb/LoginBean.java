@@ -58,7 +58,6 @@ public class LoginBean implements Serializable {
 
 	public String efetuaLogin() {
 		boolean loginValido = dao.existe(usuario);
-		System.out.println("efetuaLogin (" + loginValido + ") = " + usuario);
 		if (loginValido) {
 			this.usuarioLogado.guardaUsuario(usuario);
 
