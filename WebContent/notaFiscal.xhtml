@@ -47,7 +47,7 @@
 					<p:commandButton action="#{notaFiscalBean.cancelar}" update="@form"
 						value="Cancelar" rendered="#{not empty notaFiscalBean.item.id}" />
 
-					<h:commandButton action="#{notaFiscalBean.guardaItem}"
+					<h:commandButton action="#{notaFiscalBean.guardaItem}" 
 						value="Guardar item">
 						<f:ajax render="@form :form_lista" execute="@form" />
 					</h:commandButton>

@@ -37,6 +37,7 @@ public class Autenticador implements PhaseListener {
 			LoginBean loginBean = contexto.getApplication()
 					.evaluateExpressionGet(contexto, "#{loginBean}",
 							LoginBean.class);
+			
 			System.out.println("vai para a pagina de login? "
 					+ !loginBean.getUsuarioLogado().isLogado());
 			if (!loginBean.getUsuarioLogado().isLogado()) {

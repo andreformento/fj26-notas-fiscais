@@ -11,7 +11,7 @@ public class JPAUtil {
 	private static EntityManagerFactory emf = Persistence
 			.createEntityManagerFactory("notas");
 
-	// aqui fala que Ã© um mÃ©todo produtor
+	// aqui fala que é um método produtor
 	@Produces
 	@RequestScoped
 	public EntityManager getEntityManager() {
