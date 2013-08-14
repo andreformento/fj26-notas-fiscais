@@ -13,7 +13,7 @@
 
 			<h:form id="form_cadastro">
 				<fieldset>
-					<legend>Dados do usuario</legend>
+					<legend>Dados do usuário</legend>
 
 					<h:outputLabel value="Login" for="login" />
 					<h:inputText id="login" value="#{usuarioBean.usuario.login}" />
@@ -57,7 +57,7 @@
 
 						</h:commandLink>
 						<h:commandButton value="Remover">
-							<f:ajax render="@form" listener="#{usuarioBean.remove(usuario)}" />
+							<f:ajax render="@form" listener="#{usuarioBean.remove(usuario)}"  />
 						</h:commandButton>
 
 					</h:column>

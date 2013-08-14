@@ -14,19 +14,19 @@
 			<h:form id="formlogin">
 				<h:panelGrid columns="2" styleClass="campos">
 					<h:outputLabel value="Login:" />
-					<h:outputText value="#{loginBean.usuario.login}"
-						rendered="#{not empty loginBean.usuario.senha}" />
+					<h:outputText value="#{loginBean.usuarioLogado.usuario.login}"
+						rendered="#{loginBean.usuarioLogado.logado}" />
 					<h:inputText value="#{loginBean.usuario.login}"
-						rendered="#{empty loginBean.usuario.senha}" />
+						rendered="#{not loginBean.usuarioLogado.logado}" />
 
-					<h:outputLabel value="Senha:"
-						rendered="#{empty loginBean.usuario.senha}" />
+					<h:outputLabel value="Senha:" 
+						rendered="#{not loginBean.usuarioLogado.logado}" />
 					<h:inputSecret value="#{loginBean.usuario.senha}"
-						rendered="#{empty loginBean.usuario.senha}" />
+						rendered="#{not loginBean.usuarioLogado.logado}" />
 
 					<h:commandButton value="Efetuar login"
 						action="#{loginBean.efetuaLogin}"
-						rendered="#{empty loginBean.usuario.senha}">
+						rendered="#{not loginBean.usuarioLogado.logado}">
 					</h:commandButton>
 				</h:panelGrid>
 			</h:form>

@@ -16,7 +16,7 @@ import br.com.caelum.notasfiscais.modelo.UsuarioLogado;
 
 // colocar o LoginBean no contexto do CDI
 @Named
-// esse √© do Weld
+// esse È do Weld
 // @SessionScoped
 @RequestScoped
 public class LoginBean implements Serializable {
@@ -29,7 +29,7 @@ public class LoginBean implements Serializable {
 	private UsuarioLogado usuarioLogado;
 	private Usuario usuario = new Usuario();
 
-	// aqui ele d√° um new no UsuarioDAO
+	// aqui ele d· um new no UsuarioDAO
 	@Inject
 	public LoginBean(UsuarioDAO dao, UsuarioLogado usuarioLogado) {
 		this.dao = dao;
@@ -58,6 +58,7 @@ public class LoginBean implements Serializable {
 
 	public String efetuaLogin() {
 		boolean loginValido = dao.existe(usuario);
+		System.out.println("efetuaLogin (" + loginValido + ") = " + usuario);
 		if (loginValido) {
 			this.usuarioLogado.guardaUsuario(usuario);
 
@@ -68,15 +69,14 @@ public class LoginBean implements Serializable {
 	}
 
 	public String efetuaLogoff() {
-		System.out.println("logoff");
 		this.usuarioLogado.efetuaLogoff();
 		this.usuario = new Usuario();
-		
+
 		return login();
 	}
 
 	public String login() {
-		return PaginaUtil.LOGIN;
+		return PaginaUtil.LOGIN+"?faces-redirect=true";
 	}
 }
 

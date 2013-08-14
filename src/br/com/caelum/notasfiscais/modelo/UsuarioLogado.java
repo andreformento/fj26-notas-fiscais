@@ -20,7 +20,6 @@ public class UsuarioLogado implements Serializable {
 	}
 
 	public boolean isLogado() {
-		System.out.println("usuario = " + this.usuario);
 		return this.usuario != null;
 	}
 
@@ -30,6 +29,10 @@ public class UsuarioLogado implements Serializable {
 
 	public void efetuaLogoff() {
 		this.usuario = null;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
 }

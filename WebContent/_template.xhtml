@@ -19,17 +19,17 @@
 	</div>
 
 	<div id="usuarioLogado">
-		<h:outputText rendered="#{not empty loginBean.usuarioLogado.logado}"
-			value="Usuário(a): #{loginBean.usuario.login}"></h:outputText>
+		<h:outputText rendered="#{loginBean.usuarioLogado.logado}"
+			value="Usuário(a): #{loginBean.usuarioLogado.usuario.login}"></h:outputText>
 	</div>
 
 	<div id="menu" class="menuPersonalizado">
 		<h:form>
 			<p:menubar>
 				<p:menuitem value="Login" action="#{loginBean.login}" 
-					 rendered="#{empty loginBean.usuario.senha}"/>
+					 rendered="#{not loginBean.usuarioLogado.logado}"/>
 				
-				<p:submenu label="Cadastro" rendered="#{not empty loginBean.usuario.senha}">
+				<p:submenu label="Cadastro" rendered="#{loginBean.usuarioLogado.logado}">
 					<p:menuitem value="Produtos" url="produto.xhtml" />
 					<p:menuitem value="Notas fiscais" url="notaFiscal.xhtml" />
 					<p:menuitem value="Lista de notas fiscais" url="listaNotasFiscais.xhtml" />
@@ -37,7 +37,7 @@
 				</p:submenu>
 				
 				<p:menuitem value="Logoff" action="#{loginBean.efetuaLogoff}"
-					 rendered="#{not empty loginBean.usuario.senha}" />
+					 rendered="#{loginBean.usuarioLogado.logado}" />
 			</p:menubar>		
 		</h:form>
 	</div>

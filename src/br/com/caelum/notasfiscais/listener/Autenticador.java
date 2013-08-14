@@ -7,6 +7,7 @@ import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
 
 import br.com.caelum.notasfiscais.mb.LoginBean;
+import br.com.caelum.notasfiscais.modelo.PaginaUtil;
 
 public class Autenticador implements PhaseListener {
 
@@ -37,14 +38,12 @@ public class Autenticador implements PhaseListener {
 			LoginBean loginBean = contexto.getApplication()
 					.evaluateExpressionGet(contexto, "#{loginBean}",
 							LoginBean.class);
-			
-			System.out.println("vai para a pagina de login? "
-					+ !loginBean.getUsuarioLogado().isLogado());
+
 			if (!loginBean.getUsuarioLogado().isLogado()) {
 				NavigationHandler navigationHandler = contexto.getApplication()
 						.getNavigationHandler();
 				navigationHandler.handleNavigation(contexto, null,
-						"login?faces-redirect=true");
+						PaginaUtil.LOGIN + "?faces-redirect=true");
 
 				contexto.renderResponse();
 			}
