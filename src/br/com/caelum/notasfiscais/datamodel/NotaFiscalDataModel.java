@@ -17,10 +17,10 @@ public class NotaFiscalDataModel extends LazyDataModel<NotaFiscal> {
 	private static final long serialVersionUID = 2561161792835611873L;
 
 	@Override
-	public List<NotaFiscal> load(int inicio, int quantidade,
-			String campoDeOrdenacao, SortOrder ordem, Map<String, String> filtro) {
+	public List<NotaFiscal> load(int inicio, int quantidade, String campoDeOrdenacao, SortOrder ordem,
+			Map<String, String> filtro) {
 
-		DAO<NotaFiscal> dao = new DAO<>(NotaFiscal.class);
+		DAO<NotaFiscal> dao = new DAO<NotaFiscal>(NotaFiscal.class);
 
 		return dao.listaTodosPaginada(inicio, quantidade);
 	}

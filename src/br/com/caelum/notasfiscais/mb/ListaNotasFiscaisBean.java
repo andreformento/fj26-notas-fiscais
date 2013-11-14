@@ -37,7 +37,7 @@ public class ListaNotasFiscaisBean implements Serializable {
 		if (dataModel == null) {
 			this.dataModel = new NotaFiscalDataModel();
 
-			DAO<NotaFiscal> dao = new DAO<>(NotaFiscal.class);
+			DAO<NotaFiscal> dao = new DAO<NotaFiscal>(NotaFiscal.class);
 
 			this.dataModel.setRowCount(dao.contaTodos());
 		}

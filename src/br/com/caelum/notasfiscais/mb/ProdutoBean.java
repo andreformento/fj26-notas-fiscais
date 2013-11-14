@@ -23,7 +23,7 @@ public class ProdutoBean implements Serializable {
 	private Double resultado;
 
 	private DAO<Produto> getDAO() {
-		return new DAO<>(Produto.class);
+		return new DAO<Produto>(Produto.class);
 	}
 
 	public Produto getProduto() {

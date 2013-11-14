@@ -21,7 +21,7 @@ public class UsuarioBean implements Serializable {
 	private List<Usuario> usuarios;
 
 	private DAO<Usuario> getDAO() {
-		return new DAO<>(Usuario.class);
+		return new DAO<Usuario>(Usuario.class);
 	}
 
 	public Usuario getNovoUsuario() {

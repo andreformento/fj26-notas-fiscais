@@ -62,7 +62,7 @@ public class NotaFiscalBean implements Serializable {
 
 	public void gravar() {
 
-		DAO<NotaFiscal> dao = new DAO<>(NotaFiscal.class);
+		DAO<NotaFiscal> dao = new DAO<NotaFiscal>(NotaFiscal.class);
 		dao.adiciona(notaFiscal);
 		this.notaFiscal = new NotaFiscal();
 		this.item = new Item();
