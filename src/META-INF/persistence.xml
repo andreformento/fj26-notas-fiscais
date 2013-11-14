@@ -9,7 +9,10 @@
     
     <properties>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-      <property name="javax.persistence.jdbc.url" value="postgresql://localhost:5432/notasfiscais"/>
+      
+      <!-- <property name="javax.persistence.jdbc.url" value="postgresql://localhost:5432/notasfiscais"/> -->
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/notasfiscais"/>
+      
       <property name="javax.persistence.jdbc.user" value="gdai"/>
       <property name="javax.persistence.jdbc.password" value="gdai"/>
       

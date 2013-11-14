@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
 import br.com.caelum.notasfiscais.modelo.Usuario;
@@ -19,7 +20,8 @@ public class UsuarioDAO implements Serializable {
 	private EntityManager em;
 
 	public boolean existe(Usuario usuario) {
-		em.getTransaction().begin();
+		EntityTransaction entityTransaction = em.getTransaction();
+		entityTransaction.begin();
 
 		// CriteriaBuilder builder = em.getCriteriaBuilder();
 
@@ -30,7 +32,8 @@ public class UsuarioDAO implements Serializable {
 				.setParameter("senha", usuario.getSenha());
 
 		boolean encontrado = !query.getResultList().isEmpty();
-		em.getTransaction().commit();
+		
+		entityTransaction.commit();
 
 		return encontrado;
 	}
